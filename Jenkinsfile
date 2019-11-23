@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Fetch dependencies') {
       agent {
-        docker 'circleci/node:9.3-stretch-browsers'
+        docker 'circleci/node:12-stretch-browsers'
       }
       steps {
         sh 'yarn'
@@ -12,7 +12,7 @@ pipeline {
     }
     stage('Lint') {
       agent {
-        docker 'circleci/node:9.3-stretch-browsers'
+        docker 'circleci/node:12-stretch-browsers'
       }
       steps {
         unstash 'node_modules'
@@ -21,7 +21,7 @@ pipeline {
     }
     stage('Unit Test') {
       agent {
-        docker 'circleci/node:9.3-stretch-browsers'
+        docker 'circleci/node:12-stretch-browsers'
       }
       steps {
         unstash 'node_modules'
@@ -31,7 +31,7 @@ pipeline {
     }
     stage('E2E Test') {
       agent {
-        docker 'circleci/node:9.3-stretch-browsers'
+        docker 'circleci/node:12-stretch-browsers'
       }
       steps {
         unstash 'node_modules'
@@ -44,7 +44,7 @@ pipeline {
     }
     stage('Compile') {
       agent {
-        docker 'circleci/node:9.3-stretch-browsers'
+        docker 'circleci/node:12-stretch-browsers'
       }
       steps {
         unstash 'node_modules'
