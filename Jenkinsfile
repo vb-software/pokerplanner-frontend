@@ -26,20 +26,8 @@ pipeline {
       steps {
         unstash 'node_modules'
         sh 'yarn test:ci'
+        sh 'yarn sonar'
         junit 'coverage/**/*.xml'
-      }
-    }
-    stage('E2E Test') {
-      agent {
-        docker 'circleci/node:12-stretch-browsers'
-      }
-      steps {
-        unstash 'node_modules'
-        sh 'mkdir -p reports'
-        sh 'yarn e2e:pre-ci'
-        sh 'yarn e2e:ci'
-        sh 'yarn e2e:post-ci'
-        junit 'reports/**/*.xml'
       }
     }
     stage('Compile') {
