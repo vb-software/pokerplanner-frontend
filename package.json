@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "sonar": "sonar-scanner",
-    "test:ci": "ng test --config karma.conf.ci.js --code-coverage --progress=false"
+    "test:ci": "ng test --reporters=junit --code-coverage --watch=false"
   },
   "private": true,
   "dependencies": {
@@ -41,6 +41,7 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
+    "karma-junit-reporter": "^2.0.1",
     "protractor": "~5.4.0",
     "sonar-scanner": "^3.1.0",
     "ts-node": "~7.0.0",
