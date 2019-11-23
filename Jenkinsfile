@@ -39,7 +39,7 @@ pipeline {
         sh 'yarn e2e:pre-ci'
         sh 'yarn e2e:ci'
         sh 'yarn e2e:post-ci'
-        junit 'reports/**/*.xml'
+        junit 'coverage/**/test-report.xml'
       }
     }
     stage('Compile') {
