@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "sonar": "sonar-scanner",
-    "test:ci": "ng test --config karma.conf.ci.js --code-coverage --progress=false"
+    "test:ci": "ng test --code-coverage --watch=false"
   },
   "private": true,
   "dependencies": {
