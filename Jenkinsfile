@@ -26,7 +26,7 @@ pipeline {
       steps {
         unstash 'node_modules'
         sh 'yarn test:ci'
-        junit 'reports/**/*.xml'
+        junit 'coverage/**/*.xml'
       }
     }
     stage('E2E Test') {
@@ -39,7 +39,7 @@ pipeline {
         sh 'yarn e2e:pre-ci'
         sh 'yarn e2e:ci'
         sh 'yarn e2e:post-ci'
-        junit 'coverage/**/test-report.xml'
+        junit 'reports/**/*.xml'
       }
     }
     stage('Compile') {
