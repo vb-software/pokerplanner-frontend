@@ -49,5 +49,11 @@ pipeline {
       }
     }
 
+    stage('Archive') {
+      steps {
+        archiveArtifacts 'dist/pokerplanner/**'
+      }
+    }
+
   }
 }
