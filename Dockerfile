@@ -1,11 +1,7 @@
 FROM circleci/node:12-stretch-browsers
 
-RUN \
-  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-  add-apt-repository -y ppa:webupd8team/java && \
-  apt-get update && \
-  apt-get install -y oracle-java8-installer && \
-  rm -rf /var/lib/apt/lists/* && \
-  rm -rf /var/cache/oracle-jdk8-installer
+RUN echo "deb http://http.debian.net/debian jessie-backports main" | sudo tee --append /etc/apt/sources.list
+RUN sudo apt-get update
+RUN sudo apt-get install -t jessie-backports openjdk-8-jdk
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
