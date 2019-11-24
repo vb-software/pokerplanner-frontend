@@ -26,11 +26,13 @@ pipeline {
       environment {
         scannerHome = tool 'SonarQubeScanner'
       }
-      withSonarQubeEnv('SonarQube Scanner') {
-        sh "${scannerHome}/bin/sonar-scanner"
-      }
-      timeout(time: 10, unit: 'MINUTES') {
-        waitForQualityGate abortPipeline: true
+      steps {
+        withSonarQubeEnv('SonarQube Scanner') {
+          sh "${scannerHome}/bin/sonar-scanner"
+        }
+        timeout(time: 10, unit: 'MINUTES') {
+          waitForQualityGate abortPipeline: true
+        }
       }
     }
 
