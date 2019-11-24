@@ -7,9 +7,10 @@ pipeline {
       }
       steps {
         sh 'yarn'
-        stash includes: 'node_modules/', name: 'node_modules'
+        stash(includes: 'node_modules/', name: 'node_modules')
       }
     }
+
     stage('Lint') {
       agent {
         dockerfile true
@@ -19,6 +20,7 @@ pipeline {
         sh 'yarn lint'
       }
     }
+
     stage('Unit Test') {
       agent {
         dockerfile true
@@ -26,10 +28,10 @@ pipeline {
       steps {
         unstash 'node_modules'
         sh 'yarn test:ci'
-        sh 'yarn sonar'
         junit 'coverage/**/*.xml'
       }
     }
+
     stage('Compile') {
       agent {
         dockerfile true
@@ -37,8 +39,9 @@ pipeline {
       steps {
         unstash 'node_modules'
         sh 'yarn build:prod'
-        stash includes: 'dist/', name: 'dist'
+        stash(includes: 'dist/', name: 'dist')
       }
     }
+
   }
 }
