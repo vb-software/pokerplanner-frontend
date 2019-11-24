@@ -45,9 +45,7 @@ pipeline {
 
     stage('Compile') {
       steps {
-        unstash 'node_modules'
         sh 'yarn build:prod'
-        stash(includes: 'dist/', name: 'dist')
       }
     }
 
