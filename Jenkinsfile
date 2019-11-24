@@ -1,44 +1,55 @@
 pipeline {
-  agent none
+  agent {
+    dockerfile true
+  }
   stages {
     stage('Fetch dependencies') {
-      agent {
-        docker 'circleci/node:12-stretch-browsers'
-      }
       steps {
         sh 'yarn'
-        stash includes: 'node_modules/', name: 'node_modules'
       }
     }
-    stage('Lint') {
-      agent {
-        docker 'circleci/node:12-stretch-browsers'
-      }
+
+    stage('Run Lint') {
       steps {
-        unstash 'node_modules'
         sh 'yarn lint'
       }
     }
-    stage('Unit Test') {
-      agent {
-        docker 'circleci/node:12-stretch-browsers'
-      }
+
+    stage('Run Unit Test') {
       steps {
-        unstash 'node_modules'
         sh 'yarn test:ci'
-        sh 'yarn sonar'
+      }
+    }
+
+    stage('Publish Test Results') {
+      steps {
         junit 'coverage/**/*.xml'
       }
     }
-    stage('Compile') {
-      agent {
-        docker 'circleci/node:12-stretch-browsers'
+
+    stage('SonarQube') {
+      environment {
+        scannerHome = tool 'SonarQubeScanner'
       }
+      steps {
+        withSonarQubeEnv('sonarqube') {
+          sh "${scannerHome}/bin/sonar-scanner"
+        }
+
+        timeout(time: 10, unit: 'MINUTES') {
+          waitForQualityGate true
+        }
+
+      }
+    }
+
+    stage('Compile') {
       steps {
         unstash 'node_modules'
         sh 'yarn build:prod'
-        stash includes: 'dist/', name: 'dist'
+        stash(includes: 'dist/', name: 'dist')
       }
     }
+
   }
 }
