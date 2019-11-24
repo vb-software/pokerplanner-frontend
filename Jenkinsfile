@@ -9,15 +9,20 @@ pipeline {
       }
     }
 
-    stage('Lint') {
+    stage('Run Lint') {
       steps {
         sh 'yarn lint'
       }
     }
 
-    stage('Unit Test') {
+    stage('Run Unit Test') {
       steps {
         sh 'yarn test:ci'
+      }
+    }
+
+    stage('Publish Test Results') {
+      steps {
         junit 'coverage/**/*.xml'
       }
     }
