@@ -4,4 +4,4 @@ RUN echo "deb http://http.debian.net/debian stretch-backports main" | sudo tee -
 RUN sudo apt-get update
 RUN sudo apt-get install -t stretch-backports openjdk-8-jdk
 
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
