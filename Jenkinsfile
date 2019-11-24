@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Fetch dependencies') {
       agent {
-        docker 'circleci/node:12-stretch-browsers'
+        dockerfile true
       }
       steps {
         sh 'yarn'
@@ -12,7 +12,7 @@ pipeline {
     }
     stage('Lint') {
       agent {
-        docker 'circleci/node:12-stretch-browsers'
+        dockerfile true
       }
       steps {
         unstash 'node_modules'
@@ -21,7 +21,7 @@ pipeline {
     }
     stage('Unit Test') {
       agent {
-        docker 'circleci/node:12-stretch-browsers'
+        dockerfile true
       }
       steps {
         unstash 'node_modules'
@@ -32,7 +32,7 @@ pipeline {
     }
     stage('Compile') {
       agent {
-        docker 'circleci/node:12-stretch-browsers'
+        dockerfile true
       }
       steps {
         unstash 'node_modules'
