@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "sonar": "sonar-scanner -X",
+    "sonar": "sonar-scanner -Dsonar.branch.name=local",
     "test:ci": "ng test --reporters=junit --code-coverage --watch=false"
   },
   "private": true,
