@@ -33,7 +33,7 @@ pipeline {
       }
       steps {
         withSonarQubeEnv('sonarqube') {
-          sh "${scannerHome}/bin/sonar-scanner"
+          sh "${scannerHome}/bin/sonar-scanner -Dsonar.branch.name=${BRANCH_NAME}"
         }
 
         timeout(time: 10, unit: 'MINUTES') {
