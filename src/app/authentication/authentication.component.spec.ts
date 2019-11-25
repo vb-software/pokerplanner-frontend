@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { FormsModule } from '@angular/forms';
 
 describe('AuthenticationComponent', () => {
   let component: AuthenticationComponent;
@@ -18,7 +19,7 @@ describe('AuthenticationComponent', () => {
         RegisterComponent
       ],
       providers: [],
-      imports: [RouterTestingModule, FontAwesomeModule]
+      imports: [RouterTestingModule, FontAwesomeModule, FormsModule]
     }).compileComponents();
   }));
 

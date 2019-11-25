@@ -18,10 +18,11 @@
             </div>
             <input
               type="text"
-              name=""
+              name="username"
               class="form-control input_user"
               value=""
               placeholder="username"
+              [(ngModel)]="login.username"
             />
           </div>
           <div class="input-group mb-2">
@@ -30,10 +31,11 @@
             </div>
             <input
               type="password"
-              name=""
+              name="password"
               class="form-control input_pass"
               value=""
               placeholder="password"
+              [(ngModel)]="login.password"
             />
           </div>
           <div class="form-group">
@@ -49,7 +51,7 @@
             </div>
           </div>
           <div class="d-flex justify-content-center mt-3 login_container">
-            <button type="button" name="button" class="btn login_btn">
+            <button type="button" name="button" class="btn login_btn" (click)="onLogin()">
               Login
             </button>
           </div>
