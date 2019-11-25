@@ -70,9 +70,19 @@ describe('LoginComponent', () => {
     expect(tokenInBrowser).toBe(loginResponse.result.tokenString);
   });
 
-  it('should call onLogin and return error', () => {
+  it('should call onLogin and hanlde error:401', () => {
     const buttonEle: HTMLElement = fixture.nativeElement.querySelector('.login_btn');
     spyOn(authService, 'login').and.returnValue(throwError({ status: 401 }));
+    spyOn(component, 'onLogin').and.callThrough();
+    buttonEle.click();
+
+    expect(component.onLogin).toHaveBeenCalled();
+    expect(authService.login).toHaveBeenCalledWith(component.login);
+  });
+
+  it('should call onLogin and hanlde error:NOT 401', () => {
+    const buttonEle: HTMLElement = fixture.nativeElement.querySelector('.login_btn');
+    spyOn(authService, 'login').and.returnValue(throwError({ status: 500 }));
     spyOn(component, 'onLogin').and.callThrough();
     buttonEle.click();
 
