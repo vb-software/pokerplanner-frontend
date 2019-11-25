@@ -9,14 +9,14 @@ import { httpOptions } from 'src/app/_constants/httpOptions';
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl = `${environment.apiUrl}\\auth`;
+  apiUrl = `${environment.apiUrl}/auth`;
 
   public loginStatus = new Subject<boolean>();
 
   constructor(private http: HttpClient) { }
 
   login(login: Login): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}\\login`, login, httpOptions);
+    return this.http.post<any>(`${this.apiUrl}/login`, login, httpOptions);
   }
 
   broadcastLoggedIn(status: boolean) {

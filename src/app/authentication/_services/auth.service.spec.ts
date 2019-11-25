@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { AuthService } from './auth.service';
-import { of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 describe('AuthService', () => {
+  let httpMock: HttpTestingController;
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientTestingModule]
   }));
@@ -16,19 +17,23 @@ describe('AuthService', () => {
 
   it('should return token on login', () => {
     const service: AuthService = TestBed.get(AuthService);
+    httpMock = TestBed.get(HttpTestingController);
     const loginResponse = {
       result: {
         tokenString: ''
       }
     };
-    let response;
-    spyOn(service, 'login').and.returnValue(of(loginResponse));
 
     service.login({username: 'some-user', password: 'password'}).subscribe(res => {
-      response = res;
+      expect(res).toEqual(loginResponse);
     });
 
-    expect(response).toEqual(loginResponse);
+    const req = httpMock.expectOne(`${environment.apiUrl}/auth/login`, 'call to api');
+    expect(req.request.method).toBe('POST');
+
+    req.flush(loginResponse);
+
+    httpMock.verify();
   });
 
 });

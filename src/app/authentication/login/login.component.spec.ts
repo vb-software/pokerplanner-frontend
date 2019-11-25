@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '../_services/auth.service';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 
@@ -49,7 +49,6 @@ describe('LoginComponent', () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     authService = TestBed.get(AuthService);
-    spyOn(authService, 'login').and.returnValue(of<any>(loginResponse));
     localStorage.removeItem('access-token');
     fixture.detectChanges();
   });
@@ -60,11 +59,24 @@ describe('LoginComponent', () => {
 
   it('should call onLogin and return token', () => {
     const buttonEle: HTMLElement = fixture.nativeElement.querySelector('.login_btn');
+    spyOn(authService, 'login').and.returnValue(of<any>(loginResponse));
     spyOn(component, 'onLogin').and.callThrough();
     buttonEle.click();
 
     expect(component.onLogin).toHaveBeenCalled();
     expect(authService.login).toHaveBeenCalledWith(component.login);
     expect(router.navigate).toHaveBeenCalledWith(['/admin']);
+    const tokenInBrowser = localStorage.getItem('access_token');
+    expect(tokenInBrowser).toBe(loginResponse.result.tokenString);
+  });
+
+  it('should call onLogin and return error', () => {
+    const buttonEle: HTMLElement = fixture.nativeElement.querySelector('.login_btn');
+    spyOn(authService, 'login').and.returnValue(throwError({ status: 401 }));
+    spyOn(component, 'onLogin').and.callThrough();
+    buttonEle.click();
+
+    expect(component.onLogin).toHaveBeenCalled();
+    expect(authService.login).toHaveBeenCalledWith(component.login);
   });
 });
