@@ -8,13 +8,12 @@ import { AuthenticationComponent } from './authentication.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
-
 @NgModule({
-  declarations: [AuthenticationComponent, LoginComponent, RegisterComponent],
-  imports: [
-    CommonModule,
-    AuthenticationRoutingModule,
-    FontAwesomeModule
-  ]
+  declarations: [
+    AuthenticationComponent,
+    LoginComponent,
+    RegisterComponent
+  ],
+  imports: [CommonModule, AuthenticationRoutingModule, FontAwesomeModule]
 })
-export class AuthenticationModule { }
+export class AuthenticationModule {}
