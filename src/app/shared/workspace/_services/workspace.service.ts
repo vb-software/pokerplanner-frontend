@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Workspace } from '../../_models/workspace';
-import { httpOptions } from 'src/app/_constants/httpOptions';
+import { httpOptions } from 'src/app/shared/workspace/_constants/httpOptions';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -19,6 +19,14 @@ export class WorkspaceService {
       .pipe(
         catchError(err => throwError(err)),
         map<any, Workspace>(res => res.result)
+      );
+  }
+
+  getWorkspaces(): Observable<Array<Workspace>> {
+    return this.http.get<Array<Workspace>>(this.apiUrl)
+      .pipe(
+        catchError(err => throwError(err)),
+        map<any, Array<Workspace>>(res => res.result)
       );
   }
 }

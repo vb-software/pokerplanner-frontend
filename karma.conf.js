@@ -14,7 +14,11 @@ module.exports = function (config) {
       require('karma-junit-reporter')
     ],
     client: {
-      clearContext: false // leave Jasmine Spec Runner output visible in browser
+      clearContext: false, // leave Jasmine Spec Runner output visible in browser
+      jasmine: {
+        random: true
+        // seed: 28098
+      }
     },
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, './coverage/pokerplanner'),
