@@ -32,7 +32,9 @@ describe('AuthService', () => {
     expect(req.request.method).toBe('POST');
 
     req.flush(loginResponse);
+  });
 
+  afterEach(() => {
     httpMock.verify();
   });
 
