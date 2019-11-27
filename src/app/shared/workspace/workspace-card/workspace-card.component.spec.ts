@@ -16,6 +16,16 @@ describe('WorkspaceCardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(WorkspaceCardComponent);
     component = fixture.componentInstance;
+    component.workspaceSummary = {
+      name: 'MyWorkspace',
+      allowRevotes: true,
+      averageScore: 0,
+      hideUserVotes: true,
+      releasesCount: 0,
+      scoreSystem: 'Fibonnaci',
+      usersCount: 0,
+      guid: ''
+    };
     fixture.detectChanges();
   });
 

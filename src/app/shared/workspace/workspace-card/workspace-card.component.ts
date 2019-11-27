@@ -8,7 +8,7 @@ import { WorkspaceSummary } from '../../_models/workspace-summary';
 })
 export class WorkspaceCardComponent implements OnInit {
   @Input() workspaceSummary: WorkspaceSummary;
-  
+
   constructor() { }
 
   ngOnInit() {

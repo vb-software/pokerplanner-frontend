@@ -7,6 +7,7 @@ import {
 } from '@angular/common/http/testing';
 import { Workspace } from '../../_models/workspace';
 import { environment } from 'src/environments/environment';
+import { WorkspaceSummary } from '../../_models/workspace-summary';
 
 describe('WorkspaceService', () => {
   let httpMock: HttpTestingController;
@@ -72,14 +73,14 @@ describe('WorkspaceService', () => {
     const service: WorkspaceService = TestBed.get(WorkspaceService);
     httpMock = TestBed.get(HttpTestingController);
 
-    const workspaces: Array<Workspace> = [];
+    const workspaces: Array<WorkspaceSummary> = [];
 
     service.getWorkspaceSummaries().subscribe(res => {
       expect(res).toEqual(workspaces);
     });
 
     const req = httpMock.expectOne(
-      `${environment.apiUrl}/workspaces`,
+      `${environment.apiUrl}/workspaces/summaries`,
       'call to api'
     );
     expect(req.request.method).toBe('GET');
@@ -102,7 +103,7 @@ describe('WorkspaceService', () => {
     });
 
     const req = httpMock.expectOne(
-      `${environment.apiUrl}/workspaces`,
+      `${environment.apiUrl}/workspaces/summaries`,
       'call to api'
     );
     expect(req.request.method).toBe('GET');
