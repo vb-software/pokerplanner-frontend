@@ -14,7 +14,7 @@ export class AdminComponent implements OnInit {
   constructor(private workspaceService: WorkspaceService, private toast: ToastrService) {}
 
   ngOnInit() {
-    this.workspaceService.getWorkspaces().subscribe(
+    this.workspaceService.getWorkspaceSummaries().subscribe(
       workspaces => (this.workspaces = workspaces),
       err => {
         console.log('some error occurred');

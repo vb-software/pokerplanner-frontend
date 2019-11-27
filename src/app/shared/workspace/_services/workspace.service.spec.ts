@@ -74,7 +74,7 @@ describe('WorkspaceService', () => {
 
     const workspaces: Array<Workspace> = [];
 
-    service.getWorkspaces().subscribe(res => {
+    service.getWorkspaceSummaries().subscribe(res => {
       expect(res).toEqual(workspaces);
     });
 
@@ -94,7 +94,7 @@ describe('WorkspaceService', () => {
     const service: WorkspaceService = TestBed.get(WorkspaceService);
     httpMock = TestBed.get(HttpTestingController);
 
-    service.getWorkspaces().subscribe(() => {
+    service.getWorkspaceSummaries().subscribe(() => {
       fail('should not see me');
     },
     err => {

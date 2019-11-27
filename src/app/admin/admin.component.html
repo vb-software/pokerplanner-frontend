@@ -6,11 +6,7 @@
   </div>
   <div class="row mt-3">
     <div *ngFor="let workspace of workspaces" class="col-4">
-      <div class="card">
-        <div class="card-body">
-            {{workspace.name}}
-        </div>
-      </div>
+      <app-workspace-card [workspaceSummary]="workspace"></app-workspace-card>
     </div>
   </div>
 </div>

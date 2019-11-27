@@ -1,1 +1,28 @@
-<p>workspace-card works!</p>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12 clearfix">
+        <h4 class="m-0 p-0 float-left">{{ workspaceSummary.name }}</h4>
+        <div class="float-right">
+          <span class="badge badge-warning">
+            {{ workspaceSummary.scoreSystem }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2"></div>
+    <div class="row mt-2">
+      <div class="col-12 d-flex">
+        <div class="flex-fill text-center">
+          <p>{{ workspaceSummary.usersCount }}</p>
+        </div>
+        <div class="flex-fill text-center">
+          <p>{{ workspaceSummary.releasesCount }}</p>
+        </div>
+        <div class="flex-fill text-center">
+          <p>{{ workspaceSummary.averageScore }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
