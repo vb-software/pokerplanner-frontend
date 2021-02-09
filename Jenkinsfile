@@ -1,6 +1,9 @@
 pipeline {
   agent {
-    dockerfile true
+    dockerfile {
+      filename 'Dockerfile'
+      args '-v /var/jenkins_home/sonar-scanner:/var/jenkins_home/sonar-scanner'
+    }
   }
   stages {
     stage('Fetch dependencies') {
