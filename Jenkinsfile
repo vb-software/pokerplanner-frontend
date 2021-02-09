@@ -3,7 +3,7 @@ pipeline {
     label "none"
   }
   stages {
-    stage {'Inside Docker'} {
+    stage ('Inside Docker') {
       agent {
         dockerfile {
           filename 'Dockerfile'
