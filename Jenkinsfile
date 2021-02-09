@@ -1,8 +1,8 @@
 pipeline {
+  agent {
+    label "none"
+  }
   stages {
-    agent {
-      label "none"
-    }
     stage {'Inside Docker'} {
       agent {
         dockerfile {
