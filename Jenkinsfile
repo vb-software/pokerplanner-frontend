@@ -30,19 +30,30 @@ pipeline {
       }
     }
 
-    stage('SonarQube') {
-      environment {
-        scannerHome = tool 'SonarQubeScanner'
+    stage('Analyze') {
+      agent {
+        docker {
+          image 'sonarsource/sonar-scanner-cli'
+          // In order to be able to use http://sonarqube:9000 we need to be in the
+          // same network as Jenkins and SonarQube are in.
+          args '--net jenkins'
+          // To quarantee that the workspace contains the sources pulled in previous
+          // stage, we need to use the pipeline level workspace.
+          reuseNode true
+        }
       }
       steps {
-        withSonarQubeEnv('sonarqube') {
-          sh "${scannerHome}/bin/sonar-scanner -Dsonar.branch.name=${BRANCH_NAME}"
+        // The parameter must match the name you gave for the SonarQube server when
+        // configuring it.
+        withSonarQubeEnv('Sonar') {
+          // Here, job name is used as the project key and current workspace as the
+          // sources location.
+          sh """
+            sonar-scanner \
+              -D'sonar.projectKey=${JOB_NAME}'\
+              -D'sonar.sources=${WORKSPACE}'
+          """
         }
-
-        timeout(time: 10, unit: 'MINUTES') {
-          waitForQualityGate true
-        }
-
       }
     }
 
