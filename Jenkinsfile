@@ -2,7 +2,7 @@ pipeline {
   agent {
     dockerfile {
       filename 'Dockerfile'
-      args '-v /var/jenkins_home/sonar-scanner:/var/jenkins_home/sonar-scanner'
+      args '-v /var/jenkins_home/sonar-scanner:/var/jenkins_home/sonar-scanner -v /var/run/docker.sock:/var/run/docker.sock'
     }
   }
   stages {
