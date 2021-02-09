@@ -1,6 +1,9 @@
 pipeline {
   agent {
-    dockerfile true
+    dockerfile {
+      filename 'Dockerfile'
+      args '--net jenkins'
+    }
   }
   stages {
     stage('Fetch dependencies') {
